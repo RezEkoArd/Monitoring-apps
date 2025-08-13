@@ -2,33 +2,36 @@ import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { SharedData, type NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+import { BookCopy, BookOpen, ChartNoAxesCombined, Coins, Folder, Handshake, Home, icons, LayoutGrid, List, User2, User2Icon } from 'lucide-react';
 import AppLogo from './app-logo';
+import { getNavigationByRole, NavigationItem } from '@/config/navigation';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
-    },
-];
-
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
-];
+const transformToNavItems = (items: NavigationItem[]): NavItem[] => {
+    return items.map(item => ({
+        title: item.title,
+        href: route(item.routeName),
+        icon: item.icon,
+        items: item.items?.map(subItem => ({
+            title: subItem.title,
+            href: route(subItem.routeName),
+            icon: List,
+            badge: subItem.badge,
+        })),
+    }));
+};
 
 export function AppSidebar() {
+
+    const { auth } = usePage<SharedData>().props;
+    
+    const userRole = auth?.user?.role as string;
+
+    const navigationConfig = getNavigationByRole(userRole);
+    const navLinks = transformToNavItems(navigationConfig);
+
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -44,11 +47,10 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={navLinks} />
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

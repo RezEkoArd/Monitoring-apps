@@ -15,11 +15,25 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin',
-            'email' => 'rezekoard@gmail.com',
-            'role' => UserRole::Operator,
-            'password' => Hash::make('password123'),
+        User::insert([
+            [
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'role' => UserRole::Admin->value, // <- gunakan ->value untuk enum
+                'password' => Hash::make('password123'),
+            ],
+            [
+                'name' => 'Teknisi',
+                'email' => 'teknisi@gmail.com',
+                'role' => UserRole::Teknisi->value,
+                'password' => Hash::make('password123'),
+            ],
+            [
+                'name' => 'Operator',
+                'email' => 'operator@gmail.com',
+                'role' => UserRole::Operator->value,
+                'password' => Hash::make('password123'),
+            ]
         ]);
     }
 }

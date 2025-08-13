@@ -41,3 +41,11 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface CardDashboardProps {
+    cardDescription: string;
+    cardTitle: string;
+    cardAction?: ElementType | null
+    footerTitle:string;
+    footerDescription:string;
+}
