@@ -18,11 +18,11 @@ import {
 const chartConfig = {
   fisik: {
     label: "Fisik",
-    color: "var(--chart-4)",
+    color: "var(--chart-1)",
   },
   digital: {
     label: "Digital",
-    color: "var(--chart-3)",
+    color: "var(--chart-2)",
   },
 } satisfies ChartConfig;
 

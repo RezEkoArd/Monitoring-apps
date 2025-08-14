@@ -22,7 +22,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: Home,
         },
         {
-            routeName: 'dashboard',
+            routeName: 'mesin.index',
             title: 'Management Mesin',
             icon: ServerCog,
         },

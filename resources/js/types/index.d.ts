@@ -49,3 +49,26 @@ export interface CardDashboardProps {
     footerTitle:string;
     footerDescription:string;
 }
+
+export interface FlashMessages {
+    success?: string,
+    errorMessage: string
+}
+
+export interface Mesin {
+    id: string
+    kode_mesin: string
+    nama_mesin: string
+    lokasi: string
+    kategori: string
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PagePropsMachine extends Record<string, any> {
+    flash: FlashMessages;
+    data: Mesin[];
+    filters : {
+        search: string | null;
+    }
+}
