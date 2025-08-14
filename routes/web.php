@@ -14,7 +14,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('/mesin', [MesinController::class, 'index'])->name('mesin.index');
-    
+    Route::post('/mesin', [MesinController::class, 'store'])->name('mesin.store');
+    Route::put('/mesin/{id}', [MesinController::class, 'update'])->name('mesin.update');
+    Route::delete('/mesin/{id}', [MesinController::class, 'destroy'])->name('mesin.destroy');
+
 });
 
 require __DIR__.'/settings.php';

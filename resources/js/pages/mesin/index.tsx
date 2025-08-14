@@ -11,6 +11,7 @@ import { DataTableMesin } from './data-table/data-table';
 import { columns } from './data-table/column';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
+import CreateMesin from '@/components/form-create-mesin';
 
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -83,7 +84,7 @@ export default function index() {
                     <SheetTrigger asChild>
                         <Button variant="outline">Create</Button>
                     </SheetTrigger>
-                    {/* <CreateBook categories={categories}/> */}
+                    <CreateMesin/>
                 </Sheet>
             </div>
                 <DataTableMesin columns={columns} data={data} />
