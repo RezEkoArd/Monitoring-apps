@@ -65,9 +65,24 @@ export interface Mesin {
     updated_at: string;
 }
 
+export interface UsersRole {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+}
+
 export interface PagePropsMachine extends Record<string, any> {
     flash: FlashMessages;
     data: Mesin[];
+    filters : {
+        search: string | null;
+    }
+}
+
+export interface PagePropsUserList extends Record<string, any> {
+    flash: FlashMessages;
+    data: UsersRole[];
     filters : {
         search: string | null;
     }

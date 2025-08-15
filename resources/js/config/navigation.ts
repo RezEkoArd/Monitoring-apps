@@ -27,7 +27,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: ServerCog,
         },
         {
-            routeName: 'dashboard',
+            routeName: 'users.index',
             title: 'Management Users',
             icon: User2,
         },

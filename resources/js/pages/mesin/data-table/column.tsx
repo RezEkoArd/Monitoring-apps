@@ -2,17 +2,11 @@ import EditMesin from "@/components/form-edit-mesin"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { router, useForm } from "@inertiajs/react"
 import { ColumnDef } from "@tanstack/react-table"
-import { Edit, MoreHorizontal, Trash, Trash2 } from "lucide-react"
+import { Edit, Trash2 } from "lucide-react"
 
 type Mesin = {
   id: string
@@ -60,9 +54,8 @@ export const columns: ColumnDef<Mesin>[] = [
 
       return (
         <div className="flex gap-2">
-          <Button variant="outline" className="hover:bg-red-300 hover:text-red-600"  onClick={handleDelete}
-          >
-              <Trash2  /> 
+          <Button variant="outline" className="hover:bg-red-300 hover:text-red-600"  onClick={handleDelete}>
+              <Trash2/> 
           </Button>
           <Sheet>
               <SheetTrigger asChild>
