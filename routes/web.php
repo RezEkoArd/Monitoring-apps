@@ -20,14 +20,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/mesin/{id}', [MesinController::class, 'update'])->name('mesin.update');
     Route::delete('/mesin/{id}', [MesinController::class, 'destroy'])->name('mesin.destroy');
 
+    // Management Kerusakan
+
 });
  
 // Role admin
  Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    
     // Management Users - hanya admin yang bisa mengubah role
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');    
     Route::put('/users/{id}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
 });
 

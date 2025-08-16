@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Mesin extends Model
 {
@@ -12,4 +13,10 @@ class Mesin extends Model
         'lokasi',
         'kategori'
     ];
+
+
+    public function kerusakan(): HasMany
+    {
+        return $this->hasMany(Kerusakan::class);
+    }
 }

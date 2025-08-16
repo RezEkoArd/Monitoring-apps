@@ -46,7 +46,7 @@ class UserController extends Controller
             'role' => $request->role
         ]);
 
-        return redirect()->back()->with('succes', 'Role user berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Role user berhasil diperbarui.');
 
     }
 

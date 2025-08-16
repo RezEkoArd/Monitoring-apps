@@ -50,6 +50,7 @@ const EditRole = ({user} : EditUsersProps ) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        console.log('Data:', data);
         if (user) {
             put(`/users/${user.id}/role`, {
                 preserveScroll: true,
