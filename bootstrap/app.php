@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            // 'operator' => \App\Http\Middleware\OperatorMiddleware::class,
         ]);
 
         // Web middleware group

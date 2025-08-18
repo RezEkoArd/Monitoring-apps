@@ -13,7 +13,7 @@ class Kerusakan extends Model
         'user_id',
         'deskripsi',
         'status',
-        'waktu-lapor'
+        'waktu_lapor'
     ];
 
     protected $casts = [

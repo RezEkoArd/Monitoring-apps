@@ -72,6 +72,17 @@ export interface UsersRole {
     role: string;
 }
 
+export interface Kerusakan {
+    id: string;
+    mesin_id: string;
+    // mesin_id: {id:string; kode_mesin: string; nama_mesin: string; lokasi: string; kategori: string;};
+    // user_id: {id:string; name: string;};
+    user_id: string;
+    deskripsi: string;
+    status: string;
+    waktu_lapor: string;
+}
+
 export interface PagePropsMachine extends Record<string, any> {
     flash: FlashMessages;
     data: Mesin[];
@@ -84,6 +95,14 @@ export interface PagePropsUserList extends Record<string, any> {
     flash: FlashMessages;
     data: UsersRole[];
     filters : {
+        search: string | null;
+    }
+}
+
+export interface PagePropsKerusakanList extends Record<string, any> {
+    flash: FlashMessages;
+    data: Kerusakan[];
+    filters: {
         search: string | null;
     }
 }

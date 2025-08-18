@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KerusakanController;
 use App\Http\Controllers\MesinController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/mesin/{id}', [MesinController::class, 'destroy'])->name('mesin.destroy');
 
     // Management Kerusakan
-
+    Route::get('/kerusakan', [KerusakanController::class, 'index'])->name('kerusakan.index');
+    Route::post('/kerusakans', [KerusakanController::class, 'store'])->name('kerusakan.store'); 
 });
  
 // Role admin
@@ -30,6 +32,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');    
     Route::put('/users/{id}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
 });
+
+
+// Role Opertor
+// Route::middleware((['auth', 'verified', 'operator']))->group(function () {
+//     Route::post('/kerusakans', [KerusakanController::class, 'store'])->name('kerusakan.store'); 
+// });
 
 
 require __DIR__.'/settings.php';

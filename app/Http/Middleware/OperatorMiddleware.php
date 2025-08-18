@@ -2,13 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\UserRole;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class OperatorMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,10 +16,9 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if (!Auth::check() || Auth::user()->role !== UserRole::Admin) {
+        if(!Auth::check() || Auth::user()->role !== 'operator') {
             return redirect()->route('dashboard')
-                ->with('messageError', 'Akses ditolak. Hanya admin yang dapat mengakses halaman ini.');
+            ->with('messageError', 'Akses ditolak. Hanya operator yang dapat mengakses halaman ini.');
         }
 
         return $next($request);
