@@ -9,9 +9,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
+import CreateMesin from '@/components/form-create-mesin';
 import { DataTableKerusakan } from './data-table/data-table';
 import CreateKerusakan from '@/components/form-create-kerusakan';
-import { columnsOperator } from './data-table/column-operator';
 import { columnsAdmin } from './data-table/column-admin';
 
 
@@ -93,15 +93,7 @@ export default function index() {
                         </Sheet>
                     )}
             </div>
-
-                {user?.role === 'operator' && (
-                       <DataTableKerusakan columns={columnsOperator} data={data} />
-                )}
-
-                {user?.role === 'admin' && (
-                       <DataTableKerusakan columns={columnsAdmin} data={data} />
-                )}
-                
+                <DataTableKerusakan columns={columnsAdmin} data={data} />
         </div>
     </AppLayout>
   )

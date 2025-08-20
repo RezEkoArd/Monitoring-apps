@@ -32,7 +32,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: User2,
         },
         {
-            routeName: 'dashboard',
+            routeName: 'kerusakans.index',
             title: 'Monitoring Kerusakan',
             icon: MonitorCog,
         },
@@ -73,7 +73,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: Home,
         },
         {
-            routeName: 'kerusakan.index',
+            routeName: 'kerusakans.index',
             title: 'Monitoring Kerusakan',
             icon: MonitorCog,
         },

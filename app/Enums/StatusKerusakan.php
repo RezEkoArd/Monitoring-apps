@@ -4,7 +4,8 @@ namespace App\Enums;
 
 enum StatusKerusakan: string
 {
-    case Dilaporkan = 'dilaporkan';
-    case Proses = 'proses';
-    case Selesai = 'selesai';
+    case Dilaporkan = 'Dilaporkan';
+    case DalamPerbaikan = 'Dalam Perbaikan';
+    case Selesai = 'Selesai';
+    case DiTolak = 'DiTolak';
 }

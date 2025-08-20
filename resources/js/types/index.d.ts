@@ -106,3 +106,8 @@ export interface PagePropsKerusakanList extends Record<string, any> {
         search: string | null;
     }
 }
+
+export interface pagePropsAssignKerusakan extends Record<string, any> {
+    teknisi: User[],
+    kerusakan: Kerusakan,
+}

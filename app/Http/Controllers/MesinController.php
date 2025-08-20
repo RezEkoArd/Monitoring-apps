@@ -49,7 +49,6 @@ class MesinController extends Controller
 
     public function update(Request $request, $id) {
 
-        // dd(request()->all());
         $validated = $request->validate([
             'nama_mesin' => 'required|string|max:50',
             'lokasi' => 'required|string|max:255',

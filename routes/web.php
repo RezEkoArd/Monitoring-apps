@@ -21,9 +21,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/mesin/{id}', [MesinController::class, 'update'])->name('mesin.update');
     Route::delete('/mesin/{id}', [MesinController::class, 'destroy'])->name('mesin.destroy');
 
-    // Management Kerusakan
-    Route::get('/kerusakan', [KerusakanController::class, 'index'])->name('kerusakan.index');
+    // Management Kerusakan 
+    // Route::get('/kerusakan-admin', [KerusakanController::class, 'index'])->name('kerusakan.admin.index');
+    Route::get('/kerusakans', [KerusakanController::class, 'indexOperator'])->name('kerusakans.index');
     Route::post('/kerusakans', [KerusakanController::class, 'store'])->name('kerusakan.store'); 
+    Route::delete('/kerusakans/{id}', [KerusakanController::class, 'destroy'])->name('kerusakan.destroy');
+
+    Route::get('/kerusakans/{id}/assign', [KerusakanController::class, 'assign'])->name('kerusakan.assign');
+    Route::patch('/kerusakans/{id}/assign', [KerusakanController::class, 'update'])->name('perbaikan.assign');
 });
  
 // Role admin

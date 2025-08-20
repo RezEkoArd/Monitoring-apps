@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('mesin_id')->constrained('mesins')->onDelete('restrict');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('deskripsi');
-            $table->enum('status', ['dilaporkan', 'proses', 'selesai'])->default('dilaporkan');
+            $table->enum('status', ['Dilaporkan', 'Dalam Perbaikan', 'Selesai', 'Ditolak'])->default('Dilaporkan');
             $table->date('waktu_lapor');
             $table->timestamps();
         });
