@@ -73,10 +73,13 @@ class KerusakanController extends Controller
             'mesin_id' => 'required|exists:mesins,id',
             'deskripsi' => 'required|string|max:255',
         ]);
+
+        $nextId = (Kerusakan::max('id') ?? 0) + 1;
         
         Kerusakan::create([
             'mesin_id' => $validated['mesin_id'],
             'user_id' => Auth::id(),
+            'kode_kerusakan' => 'KRS-' . str_pad($nextId, 3, '0', STR_PAD_LEFT),
             'deskripsi' => $validated['deskripsi'],
             'status' => StatusKerusakan::Dilaporkan->value,
             'waktu_lapor' => now()

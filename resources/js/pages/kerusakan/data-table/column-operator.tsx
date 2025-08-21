@@ -26,6 +26,10 @@ export const columnsOperator: ColumnDef<Kerusakan>[] = [
     cell: ({ row }) => row.index + 1,
   },
   {
+    accessorKey: "kode_kerusakan",
+    header: "ID Report Kerusakan",
+  },
+  {
     accessorKey: "mesin.kode_mesin",
     header: "Kode Mesin",
   },

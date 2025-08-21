@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('mesin_id')->constrained('mesins')->onDelete('restrict');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('kode_kerusakan');
             $table->string('deskripsi');
             $table->enum('status', ['Dilaporkan', 'Dalam Perbaikan', 'Selesai', 'Ditolak'])->default('Dilaporkan');
             $table->date('waktu_lapor');

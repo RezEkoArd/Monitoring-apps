@@ -11,6 +11,7 @@ class Kerusakan extends Model
     protected $fillable = [
         'mesin_id',
         'user_id',
+        'kode_kerusakan',
         'deskripsi',
         'status',
         'waktu_lapor'
