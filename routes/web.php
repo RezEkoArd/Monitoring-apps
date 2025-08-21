@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KerusakanController;
 use App\Http\Controllers\MesinController;
+use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,13 +23,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/mesin/{id}', [MesinController::class, 'destroy'])->name('mesin.destroy');
 
     // Management Kerusakan 
-    // Route::get('/kerusakan-admin', [KerusakanController::class, 'index'])->name('kerusakan.admin.index');
     Route::get('/kerusakans', [KerusakanController::class, 'indexOperator'])->name('kerusakans.index');
     Route::post('/kerusakans', [KerusakanController::class, 'store'])->name('kerusakan.store'); 
     Route::delete('/kerusakans/{id}', [KerusakanController::class, 'destroy'])->name('kerusakan.destroy');
 
     Route::get('/kerusakans/{id}/assign', [KerusakanController::class, 'assign'])->name('kerusakan.assign');
     Route::patch('/kerusakans/{id}/assign', [KerusakanController::class, 'update'])->name('perbaikan.assign');
+
+    // Management Perbaikan
+    Route::get('/perbaikan', [PerbaikanController::class, 'index'])->name('perbaikan.index');
 });
  
 // Role admin
@@ -38,11 +41,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/users/{id}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
 });
 
-
-// Role Opertor
-// Route::middleware((['auth', 'verified', 'operator']))->group(function () {
-//     Route::post('/kerusakans', [KerusakanController::class, 'store'])->name('kerusakan.store'); 
-// });
 
 
 require __DIR__.'/settings.php';

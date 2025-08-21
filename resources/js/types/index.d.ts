@@ -111,3 +111,12 @@ export interface pagePropsAssignKerusakan extends Record<string, any> {
     teknisi: User[],
     kerusakan: Kerusakan,
 }
+
+
+export interface pagePropsPerbaikan extends Record<string, any> {
+    flash: FlashMessages;
+    perbaikan: Perbaikan[];
+    filters: {
+        search: string | null;
+    }
+}

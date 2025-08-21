@@ -55,7 +55,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: MonitorCog,
         },
         {
-            routeName: 'dashboard',
+            routeName: 'perbaikan.index',
             title: 'Input Perbaikan',
             icon: Hammer,
         },
