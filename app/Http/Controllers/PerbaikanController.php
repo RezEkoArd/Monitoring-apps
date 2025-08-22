@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatusKerusakan;
 use App\Models\Perbaikan;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PerbaikanController extends Controller
@@ -14,21 +15,59 @@ class PerbaikanController extends Controller
     {
         $searchQuery = $request->query('search');
 
-        $perbaikans = Perbaikan::with(['kerusakan', 'teknisi'])
-        ->when($searchQuery, fn($q) =>
-            $q->whereAny(['tindakan', 'sparepart', 'catatan'], 'like', "%{$searchQuery}%")
-            ->orWhereHas('kerusakan', fn($mq) =>
-                $mq->whereAny(['deskripsi', 'status'], 'like', "%{$searchQuery}%")
-            )
-            ->orWhereHas('teknisi', fn($uq) =>
-                $uq->where('name', 'like', "%{$searchQuery}%")
-            )
-        )
-        ->get();
+        // Query builder
+        $query = Perbaikan::with(['kerusakan', 'teknisi']);
+        
+        // Filter untuk teknisi - hanya tampilkan tugas yang di-assign ke mereka
+        if (Auth::user()->role->value === 'teknisi') {
+            $query->where('teknisi_id', Auth::id());
+        }
+    
+        // Filter search
+        if ($searchQuery) {
+            $query->where(function ($q) use ($searchQuery) {
+                $q->where('tindakan', 'like', "%{$searchQuery}%")
+                  ->orWhere('sparepart', 'like', "%{$searchQuery}%")
+                  ->orWhere('catatan', 'like', "%{$searchQuery}%")
+                  ->orWhereHas('kerusakan', function ($subQ) use ($searchQuery) {
+                      $subQ->where('deskripsi', 'like', "%{$searchQuery}%")
+                           ->orWhere('status', 'like', "%{$searchQuery}%");
+                  });
+            });
+        }
+
+        $perbaikan = $query->latest()->get();
 
         return Inertia::render('perbaikan/index', [
-            'perbaikan' => $perbaikans, 
+            'perbaikan' => $perbaikan, 
             'filters' => $request->only(['search']),
         ]);
     }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'id' => 'required|exists:perbaikans,id',
+            'tindakan' => 'required|string|max:255',
+            'sparepart' => 'required|string|max:255',
+
+        ]);
+
+        // Ambil data perbaikan
+        $perbaikan = Perbaikan::with('kerusakan')->findOrFail($request->id);
+
+        // Update data
+        $perbaikan -> update([
+            'tindakan' => $validated['tindakan'],
+            'sparepart' =>  $validated['sparepart'],
+            'waktu_selesai' => now()
+        ]);
+
+        $perbaikan->kerusakan()->update([
+            'status' => StatusKerusakan::Selesai->value,
+        ]);
+
+        return redirect()->route('perbaikan.index')->with('success', 'Perbaikan berhasil diperbarui dan kerusakan diselesaikan');
+    }
+
 }

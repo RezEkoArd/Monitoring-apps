@@ -27,7 +27,7 @@ export const columnsOperator: ColumnDef<Kerusakan>[] = [
   },
   {
     accessorKey: "kode_kerusakan",
-    header: "ID Report Kerusakan",
+    header: "Kerusakan ID",
   },
   {
     accessorKey: "mesin.kode_mesin",

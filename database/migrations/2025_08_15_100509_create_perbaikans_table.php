@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId('teknisi_id')->constrained('users')->onDelete('restrict');
             $table->string('tindakan');
             $table->string('sparepart');
+            $table->text('catatan')->nullable();
             $table->date('waktu_mulai');
+            $table->date('waktu_selesai')->nullable();
             $table->timestamps();
         }); 
     }

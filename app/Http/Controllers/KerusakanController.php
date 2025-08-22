@@ -119,6 +119,17 @@ class KerusakanController extends Controller
 
             // Jika status = "Dalam Perbaikan", buat record di table Perbaikan
             if ($validated['status'] === 'Dalam Perbaikan' && $request->filled('teknisi_id')) {
+
+                $existingPerbaikan = Perbaikan::where('kerusakan_id', $kerusakan->id)->first();
+
+                if ($existingPerbaikan) {
+                    // rollback dulu biar perubahan status gak kepake
+                    DB::rollBack();
+                    return redirect()
+                        ->route('kerusakans.index')
+                        ->with('errorMessage', 'Perbaikan untuk kerusakan ini sudah ada!');
+                }
+            
                 Perbaikan::create([
                     'kerusakan_id' => $kerusakan->id,
                     'teknisi_id' => $validated['teknisi_id'],
@@ -126,6 +137,7 @@ class KerusakanController extends Controller
                     'tindakan' => 'Perbaikan dimulai',
                     'sparepart' => 'Sparepart yang digunakan'
                 ]);
+            
             }
 
             DB::commit();

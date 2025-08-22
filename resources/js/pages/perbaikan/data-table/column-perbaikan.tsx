@@ -1,13 +1,17 @@
-import EditMesin from "@/components/form-edit-mesin"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  Sheet,
-  SheetTrigger,
-} from "@/components/ui/sheet"
 import { router, useForm } from "@inertiajs/react"
 import { ColumnDef } from "@tanstack/react-table"
-import { Edit, Trash2 } from "lucide-react"
+import { Edit, RailSymbol, Trash2 } from "lucide-react"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import UpdatePerbaikan from "@/components/form-edit-perbaikan"
+
 
 type Perbaikan = {
   id: string
@@ -26,9 +30,9 @@ export const columnsPerbaikan: ColumnDef<Perbaikan>[] = [
     cell: ({ row }) => row.index + 1,
   },
   {
-    accessorKey: "kerusakan_id",
+    accessorKey: "kerusakan.kode_kerusakan",
     header: "Kerusakan ID",
-  },
+  }, 
   {
     accessorKey: "teknisi.name",
     header: "Nama Teknisi",
@@ -43,10 +47,32 @@ export const columnsPerbaikan: ColumnDef<Perbaikan>[] = [
   },
   {
     accessorKey: "waktu_mulai",
-    header: "waktu_mulai",
+    header: "Waktu Mulai",
+  },
+  {
+    accessorKey: "waktu_selesai",
+    header: "waktu Selesai",
   },
   {
     accessorKey: "actions",
     header: "Action",
+    cell: ({ row }) => {
+      const perbaikan = row.original
+      
+
+      return (
+        
+        <div className="flex gap-2">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" >
+                <RailSymbol  />
+              </Button>
+            </SheetTrigger>
+            <UpdatePerbaikan perbaikan={perbaikan} />
+          </Sheet>
+        </div>
+      )
+    }
   },
 ]
