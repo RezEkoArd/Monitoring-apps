@@ -11,7 +11,7 @@ type Kerusakan = {
 }
   
 
-export const columnsOperator: ColumnDef<Kerusakan>[] = [
+export const columnsTeknisi: ColumnDef<Kerusakan>[] = [
   {
     accessorKey: "index",
     header: "No",

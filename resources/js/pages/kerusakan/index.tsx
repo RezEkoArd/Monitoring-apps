@@ -13,6 +13,7 @@ import { DataTableKerusakan } from './data-table/data-table';
 import CreateKerusakan from '@/components/form-create-kerusakan';
 import { columnsOperator } from './data-table/column-operator';
 import { columnsAdmin } from './data-table/column-admin';
+import { columnsTeknisi } from './data-table/column-teknisi';
 
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -101,7 +102,10 @@ export default function index() {
                 {user?.role === 'admin' && (
                        <DataTableKerusakan columns={columnsAdmin} data={data} />
                 )}
-                
+
+                {user?.role === 'teknisi' && (
+                       <DataTableKerusakan columns={columnsTeknisi} data={data} />
+                )}  
         </div>
     </AppLayout>
   )

@@ -50,7 +50,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: Home
         },
         {
-            routeName: 'dashboard',
+            routeName: 'kerusakans.index',
             title: 'Monitoring Kerusakan',
             icon: MonitorCog,
         },

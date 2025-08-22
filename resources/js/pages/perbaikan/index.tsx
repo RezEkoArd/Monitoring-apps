@@ -1,12 +1,7 @@
 import { Input } from '@/components/ui/input';
 import AppLayout from '@/layouts/app-layout'
-import { BreadcrumbItem, PagePropsMachine, pagePropsPerbaikan } from '@/types';
+import { BreadcrumbItem, pagePropsPerbaikan } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react'
-import {
-    Sheet,
-    SheetTrigger,
-  } from "@/components/ui/sheet"
-import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { DataTablePerbaikan } from './data-table/data-table';
