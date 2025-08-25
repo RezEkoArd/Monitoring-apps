@@ -33,15 +33,17 @@ export const columnsTeknisi: ColumnDef<Kerusakan>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-        const status = row.original.status;
-        let variant: "default" | "secondary" | "destructive" | "outline" = "secondary";
+      const status = row.original.status;
+        let variant: "default" | "secondary" | "destructive" | "outline" | "ditolak" | "dilaporkan" | "dalamperbaikan" | "selesai" = "secondary";
 
-        if (status === 'dilaporkan') {
-          variant = "destructive"; 
-        } else if (status === 'proses') {
-          variant = "default";
-        } else if (status === 'selesai') {  
-          variant = "outline";
+        if (status === 'Dilaporkan') {
+          variant = "dilaporkan"; 
+        } else if (status === 'Dalam Perbaikan') {
+          variant = "dalamperbaikan";
+        } else if (status === 'Selesai') {  
+          variant = "selesai";
+        } else if (status === 'DiTolak') {  
+          variant = "ditolak";
         }
 
         return (
