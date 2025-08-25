@@ -135,13 +135,13 @@ class KerusakanController extends Controller
                     'teknisi_id' => $validated['teknisi_id'],
                     'waktu_mulai' => now(),
                     'tindakan' => 'Perbaikan dimulai',
-                    'sparepart' => 'Sparepart yang digunakan'
+                    'sparepart' => '-'
                 ]);
             
             }
 
             DB::commit();
-            return redirect()->route('kerusakans.index')->with('success', 'Kerusakan list sudah di Assign ke Teknisi');
+            return redirect()->route('kerusakans.index')->with('success', 'Report Kerusakan sudah di Assign ke Teknisi');
 
         }catch (\Exception $e) {
             DB::rollBack();

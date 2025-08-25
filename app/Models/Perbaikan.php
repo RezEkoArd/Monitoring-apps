@@ -13,6 +13,7 @@ class Perbaikan extends Model
         'tindakan',
         'sparepart',
         'waktu_mulai',
+        'waktu_selesai',
         'catatan',
     ];
 

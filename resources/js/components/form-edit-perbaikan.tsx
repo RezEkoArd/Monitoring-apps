@@ -71,7 +71,7 @@ const UpdatePerbaikan = ({perbaikan} : EditPerbaikanProps) => {
   return (
         <SheetContent>
             <SheetHeader>
-                <SheetTitle className="mb-4">Update Perbaikan</SheetTitle>
+                <SheetTitle className="mb-4">Form Penyelesaikan Perbaikan</SheetTitle>
                 <SheetDescription asChild className="scroll-smooth">
                 <div className="overflow-y-auto max-h-[calc(100vh-120px)] pr-2">
                     <form className="space-y-8" onSubmit={handleSubmit}>
@@ -109,17 +109,15 @@ const UpdatePerbaikan = ({perbaikan} : EditPerbaikanProps) => {
                             <Label htmlFor="catatan">Catatan</Label>
                             <Textarea
                                 id="catatan"
-                                required
-                                autoFocus
                                 autoComplete="catatan"
                                 value={data.catatan}
-                                onChange={(e) => setData('catatan', e.target.value)}
+                                onChange={(e) => setData("catatan", e.target.value)}
                                 placeholder="Catatan tambahan ..."
                             />
                             <InputError message={errors.catatan} />
                         </div>
                             <Button type="submit">
-                                {processing ? "Menyimpan..." : "Simpan Perbaikan"}
+                                {processing ? "Menyimpan..." : "Selesaikan Perbaikan"}
                             </Button>
                     </form>
                 </div>

@@ -50,22 +50,29 @@ class PerbaikanController extends Controller
             'id' => 'required|exists:perbaikans,id',
             'tindakan' => 'required|string|max:255',
             'sparepart' => 'required|string|max:255',
-
+            'catatan' => 'nullable|string|max:255',
         ]);
 
         // Ambil data perbaikan
         $perbaikan = Perbaikan::with('kerusakan')->findOrFail($request->id);
 
-        // Update data
-        $perbaikan -> update([
+        $dataUpdate = [
             'tindakan' => $validated['tindakan'],
-            'sparepart' =>  $validated['sparepart'],
-            'waktu_selesai' => now()
-        ]);
+            'sparepart' => $validated['sparepart'],
+            'catatan' => $validated['catatan'] ?? null,
+        ];
 
-        $perbaikan->kerusakan()->update([
-            'status' => StatusKerusakan::Selesai->value,
-        ]);
+        if($perbaikan->kerusakan->status !== StatusKerusakan::Selesai->value) {
+            $perbaikan->kerusakan()->update([
+                'status' => StatusKerusakan::Selesai->value,
+            ]);
+
+            $dataUpdate['waktu_selesai'] = now();
+        }
+
+
+        // Update data
+        $perbaikan -> update($dataUpdate);
 
         return redirect()->route('perbaikan.index')->with('success', 'Perbaikan berhasil diperbarui dan kerusakan diselesaikan');
     }
