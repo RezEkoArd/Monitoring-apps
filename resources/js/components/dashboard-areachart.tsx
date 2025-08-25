@@ -38,7 +38,7 @@ const chartData = [
 const DashboardAreaChart = () => {
   return (
     <div className="">
-      <h1 className="text-lg font-medium mb-6">Peminjaman Buku per Bulan</h1>
+      <h1 className="text-lg font-medium mb-6">Kerusakan Mesin Bulan Ini</h1>
       <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
         <AreaChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />

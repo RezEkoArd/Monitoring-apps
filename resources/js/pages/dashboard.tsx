@@ -1,6 +1,6 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import { SharedData, type BreadcrumbItem } from '@/types';
+import { pagePropsDashboard, SharedData, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import DashboardUser from './dashboard/dashboard-admin';
 import DashboardOperator from './dashboard/dashboard-operator';
@@ -14,18 +14,37 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard() {
+    const { jumlahMesin, jumlahUser, totalPerbaikan, totalKerusakanBulanIni, listTeknisi, kerusakanTerbaru }  = usePage<pagePropsDashboard>().props
+    
     // Ambil data auth dari props yang di shared
     const { auth } = usePage<SharedData>().props;
     const userRole = auth.user.role;
 
+    
     const renderByRole = () => {
         switch (userRole) {
             case 'admin':
-                return <DashboardUser />
+                return <DashboardUser 
+                jumlahMesin={jumlahMesin} 
+                jumlahUser={jumlahUser} 
+                totalPerbaikan={totalPerbaikan} 
+                totalKerusakanBulanIni={totalKerusakanBulanIni} listTeknisi={listTeknisi} 
+                kerusakanTerbaru={kerusakanTerbaru}/>
             case 'operator':
-                return <DashboardOperator />
+                return <DashboardOperator 
+                jumlahMesin={jumlahMesin} 
+                jumlahUser={jumlahUser} 
+                totalPerbaikan={totalPerbaikan} 
+                totalKerusakanBulanIni={totalKerusakanBulanIni} listTeknisi={listTeknisi} 
+                kerusakanTerbaru={kerusakanTerbaru}
+                />
             case 'teknisi':
-                return <DashboardTeknisi />
+                return <DashboardTeknisi 
+                jumlahMesin={jumlahMesin} 
+                jumlahUser={jumlahUser} 
+                totalPerbaikan={totalPerbaikan} 
+                totalKerusakanBulanIni={totalKerusakanBulanIni} listTeknisi={listTeknisi} 
+                kerusakanTerbaru={kerusakanTerbaru}/>
             default:
                 return (
                     <div className='text-center py-12'>

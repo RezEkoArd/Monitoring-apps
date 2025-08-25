@@ -14,9 +14,17 @@ const badgeVariants = cva(
         secondary:
           "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
         destructive:
-          "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
+          "border-transparent bg-red-200 text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         outline:
           "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        selesai:
+          "text-foreground dark:text-black bg-green-300 [a&]:hover:text-accent-foreground",
+        dilaporkan:
+          "text-foreground dark:text-black bg-red-300 [a&]:hover:text-accent-foreground",
+        dalamperbaikan:
+          "text-foreground dark:text-black bg-blue-300 [a&]:hover:text-accent-foreground",
+        ditolak:
+          "text-foreground dark:text-black bg-orange-300 [a&]:hover:text-accent-foreground",
       },
     },
     defaultVariants: {

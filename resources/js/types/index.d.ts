@@ -75,8 +75,6 @@ export interface UsersRole {
 export interface Kerusakan {
     id: string;
     mesin_id: string;
-    // mesin_id: {id:string; kode_mesin: string; nama_mesin: string; lokasi: string; kategori: string;};
-    // user_id: {id:string; name: string;};
     user_id: string;
     deskripsi: string;
     status: string;
@@ -119,4 +117,23 @@ export interface pagePropsPerbaikan extends Record<string, any> {
     filters: {
         search: string | null;
     }
+}
+
+export interface pagePropsDashboard extends Record<string, any> {
+    flash: FlashMessages;
+    jumlahMesin: number;
+    jumlahUser: number;
+    totalPerbaikan: number;
+    totalKerusakanBulanIni: number;
+    listTeknisi: User[];
+    kerusakanTerbaru: Kerusakan[];
+}
+
+export interface DashboardByRole extends Record<string, any> {
+    jumlahMesin: number;
+    jumlahUser: number;
+    totalPerbaikan: number;
+    totalKerusakanBulanIni: number;
+    listTeknisi: User[];
+    kerusakanTerbaru: Kerusakan[];
 }
