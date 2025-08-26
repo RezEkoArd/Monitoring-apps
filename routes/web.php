@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExcelExportController;
 use App\Http\Controllers\KerusakanController;
 use App\Http\Controllers\MesinController;
 use App\Http\Controllers\PerbaikanController;
@@ -40,6 +41,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Management Users - hanya admin yang bisa mengubah role
     Route::get('/users', [UserController::class, 'index'])->name('users.index');    
     Route::put('/users/{id}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
+
+    // Report
+    Route::get('/report', [ExcelExportController::class, 'index'])->name('report.index');
+
+    Route::get('/report/export', [ExcelExportController::class, 'reportKerusakan'])->name('report.export.get');
+    Route::post('/report/export', [ExcelExportController::class, 'reportKerusakan'])->name('report.export.post');
+
+    Route::get('/report/exportPerbaikan', [ExcelExportController::class, 'reportPerbaikan'])->name('report.perbaikan.export.get');
+    Route::post('/report/exportPerbaikan', [ExcelExportController::class, 'reportPerbaikan'])->name('report.perbaikan.export.post');
 });
 
 

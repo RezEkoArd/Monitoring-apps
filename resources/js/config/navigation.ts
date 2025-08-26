@@ -37,7 +37,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: MonitorCog,
         },
         {
-            routeName: 'dashboard',
+            routeName: 'report.index',
             title: 'Laporan',
             icon: ChartNetwork,
         },
