@@ -60,7 +60,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: Hammer,
         },
         {
-            routeName: 'dashboard',
+            routeName: 'history',
             title: 'Histori Perbaikan',
             icon: FileCog,
         },
@@ -78,7 +78,7 @@ export const roleNavigationConfig: Record<string, NavigationItem[]> = {
             icon: MonitorCog,
         },
         {
-            routeName: 'dashboard',
+            routeName: 'history',
             title: 'Histori Perbaikan',
             icon: FileCog,
         },

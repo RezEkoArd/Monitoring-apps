@@ -34,6 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/perbaikan', [PerbaikanController::class, 'index'])->name('perbaikan.index');
     Route::patch('/perbaikan/{id}', [PerbaikanController::class, 'update'])->name('perbaikan.update');
 
+    // Histori Perbaikan
+    Route::get('/history', [PerbaikanController::class, 'history'])->name('history');
+
 });
  
 // Role admin
