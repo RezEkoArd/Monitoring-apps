@@ -11,7 +11,8 @@ class Mesin extends Model
         'kode_mesin',
         'nama_mesin',
         'lokasi',
-        'kategori'
+        'kategori',
+        'gambar_mesin'
     ];
 
 

@@ -19,6 +19,7 @@ export interface FormEditProps {
     nama_mesin: string;
     lokasi: string;
     kategori: string;
+    gambar_mesin?: string | null;
 }
 
 interface EditMesinProps {
@@ -27,10 +28,12 @@ interface EditMesinProps {
 
 const EditMesin = ({mesin} : EditMesinProps) => {
     
-    const { data, setData, put, processing, errors, reset } = useForm({
-        nama_mesin: '',
-        lokasi: '',
-        kategori: '',
+    const { data, setData, post, processing, errors, reset } = useForm({
+        nama_mesin: mesin?.nama_mesin ?? "",
+        lokasi: mesin?.lokasi ?? "",
+        kategori: mesin?.kategori ?? "",
+        gambar_mesin: null as File | null,
+        _method: 'PUT',
     });
 
     useEffect(() => {
@@ -38,7 +41,9 @@ const EditMesin = ({mesin} : EditMesinProps) => {
             setData({
                 nama_mesin: mesin.nama_mesin || '',
                 lokasi: mesin.lokasi || '',
-                kategori: mesin.kategori || ''
+                kategori: mesin.kategori || '',
+                gambar_mesin: null, // default null, user bisa upload baru
+                _method: 'PUT'
             })
         }
     }, [mesin])
@@ -46,7 +51,9 @@ const EditMesin = ({mesin} : EditMesinProps) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        put(`/mesin/${mesin?.id}`, {
+        // console.log("Submitting form with data:", data);
+        post(`/mesin/${mesin?.id}`, {
+            forceFormData: true,
             preserveScroll: true,
             onSuccess: () => reset(),
         });
@@ -55,7 +62,7 @@ const EditMesin = ({mesin} : EditMesinProps) => {
   return (
         <SheetContent>
             <SheetHeader>
-                <SheetTitle className="mb-4">Create New Mesin</SheetTitle>
+                <SheetTitle className="mb-4">Edit Data Mesin</SheetTitle>
                 <SheetDescription asChild className="scroll-smooth">
                 <div className="overflow-y-auto max-h-[calc(100vh-120px)] pr-2">
                     <form className="space-y-8" onSubmit={handleSubmit}>
@@ -64,7 +71,6 @@ const EditMesin = ({mesin} : EditMesinProps) => {
                             <Input
                                 id="nama_mesin"
                                 type="text"
-                                required
                                 autoFocus
                                 autoComplete="nama_mesin"
                                 value={data.nama_mesin}
@@ -77,7 +83,6 @@ const EditMesin = ({mesin} : EditMesinProps) => {
                             <Label htmlFor="kategori">Kategori</Label>
                             <Input
                                 id="kategori"
-                                required
                                 autoFocus
                                 autoComplete="kategori"
                                 value={data.kategori}
@@ -90,7 +95,6 @@ const EditMesin = ({mesin} : EditMesinProps) => {
                             <Label htmlFor="lokasi">Lokasi</Label>
                             <Textarea
                                 id="lokasi"
-                                required
                                 autoFocus
                                 autoComplete="lokasi"
                                 value={data.lokasi}
@@ -99,6 +103,35 @@ const EditMesin = ({mesin} : EditMesinProps) => {
                             />
                             <InputError message={errors.lokasi} />
                         </div>
+                        {mesin?.gambar_mesin && (
+                                    <div className="mt-2">
+                                        <p className="text-xs text-gray-500 mb-1">Gambar saat ini:</p>
+                                        <img
+                                        src={`/storage/${mesin.gambar_mesin}`}
+                                        alt={mesin.nama_mesin}
+                                        className="w-32 h-32 object-cover rounded-lg border"
+                                        />
+                                    </div>
+                                    )}
+                        <div className="grid gap-2">
+                                <Label htmlFor="gambar_mesin">Gambar Mesin</Label>
+                                <Input
+                                    id="gambar_mesin"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) =>
+                                        setData(
+                                            "gambar_mesin",
+                                            e.target.files
+                                                ? e.target.files[0]
+                                                : null
+                                        )
+                                    }
+                                />
+                                
+                                <InputError message={errors.gambar_mesin} />
+                            </div>
+
                             <Button type="submit">Submit</Button>
                     </form>
                 </div>

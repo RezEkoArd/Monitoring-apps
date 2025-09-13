@@ -12,10 +12,6 @@ import { useForm } from "@inertiajs/react"
 import InputError from "./input-error"
 import React from "react"
 import { Textarea } from "./ui/textarea"
-  
-interface CreateMesinProps {
-    // categories: Category[]; // Tambahkan prop categories
-}
 
 const CreateMesin = () => {
     
@@ -23,7 +19,11 @@ const CreateMesin = () => {
         'nama_mesin' : '',
         'lokasi' : '',
         'kategori' : '',
+        'gambar_mesin' : null as File | null,
     });
+
+    const [preview, setPreview] = React.useState<string | null>(null);
+
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -32,6 +32,8 @@ const CreateMesin = () => {
             onSuccess: () => reset(),
         });
     }
+
+    
   return (
         <SheetContent>
             <SheetHeader>
@@ -78,6 +80,13 @@ const CreateMesin = () => {
                                 placeholder="Lokasi Mesin ..."
                             />
                             <InputError message={errors.lokasi} />
+                        </div>
+                        <div className="grid w-full max-w-sm items-center gap-3">
+                            <Label htmlFor="gambar_mesin">Gambar Mesin</Label>
+                            <Input id="gambar_mesin" type="file" accept="image/*" 
+                                onChange={(e) => setData('gambar_mesin', e.target.files ? e.target.files[0] : null)}
+                            />
+                            <InputError message={errors.gambar_mesin} />
                         </div>
                             <Button type="submit">Submit</Button>
                     </form>

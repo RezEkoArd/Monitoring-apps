@@ -14,6 +14,7 @@ type Mesin = {
   nama_mesin: string
   lokasi: string
   kategori: string
+  gambar_mesin?: string | null
 }
   
 
@@ -30,6 +31,22 @@ export const columns: ColumnDef<Mesin>[] = [
   {
     accessorKey: "nama_mesin",
     header: "Nama Mesin",
+  },
+  {
+    accessorKey: "gambar_mesin",
+    header: "Gambar Mesin", 
+    cell: ({ row }) => {
+      const mesin = row.original
+      return mesin.gambar_mesin ? (
+        <img
+          src={`/storage/${mesin.gambar_mesin}`}
+          alt={mesin.nama_mesin}
+          className="w-16 h-16 object-cover rounded-md border"
+        />
+      ) : (
+        <span className="text-gray-400 italic">No Image</span>
+      )
+    }
   },
   {
     accessorKey: "lokasi",

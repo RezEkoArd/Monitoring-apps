@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_mesin');
             $table->string('lokasi');
             $table->string('kategori');
+            $table->string('gambar_mesin')->nullable();
             $table->timestamps();
         });
     }
